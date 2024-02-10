@@ -1,24 +1,46 @@
+'use client'
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-async function getData() {
-  const res = await fetch('https://dummyjson.com/users');
-  return res.json();
-};
+export default function Home() {
+  const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState(0);
 
-export default async function Home() {
-  const data = await getData();
-  const users = data.users;
-  if(!users) return <h2 className="text-center mt-5">Loading...</h2>;
+  //fetch data from api
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch('https://dummyjson.com/users');
+      const userData = await res.json();
+      setUsers(userData.users);
+    };
+    getData();
+  },[search]);
+
+  if(users.length === 0) return <h2 className="text-center mt-5">Loading...</h2>;
+
+  //search by user first name
+  const handleFilter = (e) => {
+    const searchWord = e.target.value;
+    const newFilter = users.filter((value) => {
+      return value.firstName.toLowerCase().includes(searchWord.toLowerCase());
+    });
+    setUsers(newFilter);
+    if(newFilter.length === 0) {
+      setUsers(users);
+    } else if(searchWord == '') {
+      setSearch((pev) => pev + 1)
+    };
+  };
 
   return (
     <main className="container">
-      {/* <h1 className="text-center mt-4 mb-4">Wellcome to Profile App</h1> */}
       <div className="row mt-5">
         <div className="input-group mb-5">
           <input 
             type="text"
             className="form-control rounded-pill me-3 text-center" 
             placeholder="Search User Name"
+            onChange={handleFilter} 
           />
           <button type="button" className="btn btn-dark rounded-pill">Add User</button>
         </div>
