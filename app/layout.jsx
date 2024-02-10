@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BootstrapClient from "../components/BootstrapClient";
+import Footer from "@/components/layout/footer";
+import Nav from "@/components/layout/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +16,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
+        <Nav />
         {children}
+        <Footer />
         <BootstrapClient />
       </body>
     </html>
