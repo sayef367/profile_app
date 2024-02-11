@@ -1,4 +1,5 @@
 'use client'
+import AddUser from "@/components/addUser";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -66,6 +67,10 @@ export default function Home() {
     };
   };
 
+  // const handelSubmit = (userData) => {
+  //   console.log(userData)
+  // }
+
   return (
     <main className="container">
       <div className="row mt-5">
@@ -77,7 +82,13 @@ export default function Home() {
             placeholder="Search User Name"
             onChange={handleFilter} 
           />
-          <button type="button" className="btn btn-dark rounded-pill">Add User</button>
+          <button 
+            type="button" 
+            className="btn btn-dark rounded-pill"
+            data-bs-toggle="modal" 
+            data-bs-target="#addUserModal">
+            Add User
+          </button>
         </div>
         {/* sort bar component */}
         <div className="btn-group mb-5">
@@ -120,6 +131,8 @@ export default function Home() {
           })
         }
       </div>
+      {/* add user model    handelSubmit={handelSubmit}*/}
+      <AddUser users={users} setUsers={setUsers}/> 
     </main>
   );
 };
