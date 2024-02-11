@@ -1,5 +1,6 @@
 'use client'
 import AddUser from "@/components/addUser";
+import SortBar from "@/components/sortBar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -40,8 +41,7 @@ export default function Home() {
       //sort by name
     if(sortName === 'name'){
       setSort({ name: true, email: false, company: false });
-      const sortFirstName = users.sort((a, b) => a.firstName > b.firstName ? 1 : -1 );
-      setUsers(sortFirstName);
+      setUsers(users.sort((a, b) => a.firstName > b.firstName ? 1 : -1 ));
       if(sort.name === true) {
         setSort(sortBoolean);
         setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
@@ -49,8 +49,7 @@ export default function Home() {
     } //sort by email
     else if(sortName === 'email') {
       setSort({ name: false, email: true, company: false });
-      const sortEmail = users.sort((a, b) => a.email > b.email ? 1 : -1 );
-      setUsers(sortEmail);
+      setUsers(users.sort((a, b) => a.email > b.email ? 1 : -1 ));
       if(sort.email === true) {
         setSort(sortBoolean);
         setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
@@ -58,18 +57,13 @@ export default function Home() {
     } //sort by company
     else if(sortName === 'company') {
       setSort({ name: false, email: false, company: true });
-      const sortCompany = users.sort((a, b) => a.company.name > b.company.name ? 1 : -1 );
-      setUsers(sortCompany);
+      setUsers(users.sort((a, b) => a.company.name > b.company.name ? 1 : -1 ));
       if(sort.company === true) {
         setSort(sortBoolean);
         setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
       };
     };
   };
-
-  // const handelSubmit = (userData) => {
-  //   console.log(userData)
-  // }
 
   return (
     <main className="container">
@@ -90,27 +84,10 @@ export default function Home() {
             Add User
           </button>
         </div>
+
         {/* sort bar component */}
-        <div className="btn-group mb-5">
-          <button 
-            type="button" 
-            onClick={() => sortList('name')} 
-            className="btn btn-outline-secondary">
-            Sort by name <i className={`bi bi-caret-${sort.name == false ? 'down' : 'up'}-fill`} />
-          </button>
-          <button 
-            type="button" 
-            onClick={() => sortList('email')} 
-            className="btn btn-outline-secondary">
-            Sort by email <i className={`bi bi-caret-${sort.email == false ? 'down' : 'up'}-fill`} />
-          </button>
-          <button 
-            type="button" 
-            onClick={() => sortList('company')} 
-            className="btn btn-outline-secondary">
-            Sort by Company <i className={`bi bi-caret-${sort.company == false ? 'down' : 'up'}-fill`} />
-          </button>
-        </div>
+        <SortBar sortList={sortList} sort={sort} />
+
         {/* users list component */}
         {
           users.map((user) => {
@@ -131,7 +108,8 @@ export default function Home() {
           })
         }
       </div>
-      {/* add user model    handelSubmit={handelSubmit}*/}
+      
+      {/* add user model component*/}
       <AddUser users={users} setUsers={setUsers}/> 
     </main>
   );
