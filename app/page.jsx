@@ -78,10 +78,10 @@ export default function Home() {
           />
           <button 
             type="button" 
-            className="btn btn-dark rounded-pill"
+            className="btn btn-dark rounded-pill fw-light"
             data-bs-toggle="modal" 
             data-bs-target="#addUserModal">
-            Add User
+            <i className="bi bi-file-earmark-plus"></i> Add User
           </button>
         </div>
 

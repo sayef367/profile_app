@@ -1,15 +1,8 @@
 import { useState } from "react";
 
 export default function addUser({users, setUsers}) {
-  const [addUser, setAddUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: ''
-  });
-  const [address, setAddress] = useState({
-    address: '',
-    city: ''
-  });
+  const [addUser, setAddUser] = useState({ firstName: '', lastName: '', email: '' });
+  const [address, setAddress] = useState({ address: '', city: '' });
   const [company, setCompany] = useState('');
   const [empty, setEmpty] = useState('');
 
@@ -73,7 +66,7 @@ export default function addUser({users, setUsers}) {
                 <input 
                   type="text" 
                   className="form-control" 
-                  placeholder="Address" 
+                  placeholder="Street, Suite" 
                   value={empty.address}
                   onChange={(e) => setAddress({...address, address: e.target.value})}
                 />
@@ -100,9 +93,9 @@ export default function addUser({users, setUsers}) {
               </div>
               <div>
                 <button 
-                  className="btn btn-dark" 
+                  className="btn btn-dark fw-light" 
                   onClick={handelSubmit} >
-                  Save User
+                  <i className="bi bi-save" /> Save User
                 </button>
               </div>
             </div>

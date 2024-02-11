@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a responsive online Users Profile web app. I have built on a Frontend NextJs App Router.
+
+This web app using dependencies are:
+```bash
+"bootstrap": "^5.3.0",
+"bootstrap-icons": "^1.11.3",
+```
+
+Application functionality are:
+- Display List all the users in a card layout as the page loads.
+- Click on card, it will open a separate page and will show user details.
+- Search based on the user's name.
+- Sort the users name, email and Company name.
+- Add form data main users list.
+- responsive design large, laptop, tablet, mobile screen.
 
 ## Getting Started
+Don't refresh the page.
 
-First, run the development server:
+1. First download the code and run:
+```bash
+npm install
+```
 
+2. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Users Profile App view
+Main Home Page
+![](public/home.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Search Data
+![](public/search.png)
 
-## Learn More
+Click View Page
+![](public/clickView.png)
 
-To learn more about Next.js, take a look at the following resources:
+Sort by Name
+![](public/sortByName.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sort by Email
+![](public/sortByEmail.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Sort by Company
+![](public/sortByCompany.png)
 
-## Deploy on Vercel
+Add user Form
+![](public/addUser.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+User Data add main list
+![](public/userAddList.png)
