@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState(0);
+  const sortBoolean = { name: false, email: false, company: false };
+  const [sort, setSort] = useState(sortBoolean);
 
   //fetch data from api
   useEffect(() => {
@@ -32,18 +34,73 @@ export default function Home() {
     };
   };
 
+  //sort by name, email, company
+  const sortList = (sortName) => {
+      //sort by name
+    if(sortName === 'name'){
+      setSort({ name: true, email: false, company: false });
+      const sortFirstName = users.sort((a, b) => a.firstName > b.firstName ? 1 : -1 );
+      setUsers(sortFirstName);
+      if(sort.name === true) {
+        setSort(sortBoolean);
+        setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
+      };
+    } //sort by email
+    else if(sortName === 'email') {
+      setSort({ name: false, email: true, company: false });
+      const sortEmail = users.sort((a, b) => a.email > b.email ? 1 : -1 );
+      setUsers(sortEmail);
+      if(sort.email === true) {
+        setSort(sortBoolean);
+        setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
+      };
+    } //sort by company
+    else if(sortName === 'company') {
+      setSort({ name: false, email: false, company: true });
+      const sortCompany = users.sort((a, b) => a.company.name > b.company.name ? 1 : -1 );
+      setUsers(sortCompany);
+      if(sort.company === true) {
+        setSort(sortBoolean);
+        setUsers(users.sort((a, b) => a.id > b.id ? 1 : -1));
+      };
+    };
+  };
+
   return (
     <main className="container">
       <div className="row mt-5">
+        {/* search and user input component */}
         <div className="input-group mb-5">
           <input 
             type="text"
-            className="form-control rounded-pill me-3 text-center" 
+            className="form-control rounded-pill me-3 text-center border border-secondary" 
             placeholder="Search User Name"
             onChange={handleFilter} 
           />
           <button type="button" className="btn btn-dark rounded-pill">Add User</button>
         </div>
+        {/* sort bar component */}
+        <div className="btn-group mb-5">
+          <button 
+            type="button" 
+            onClick={() => sortList('name')} 
+            className="btn btn-outline-secondary">
+            Sort by name <i className={`bi bi-caret-${sort.name == false ? 'down' : 'up'}-fill`} />
+          </button>
+          <button 
+            type="button" 
+            onClick={() => sortList('email')} 
+            className="btn btn-outline-secondary">
+            Sort by email <i className={`bi bi-caret-${sort.email == false ? 'down' : 'up'}-fill`} />
+          </button>
+          <button 
+            type="button" 
+            onClick={() => sortList('company')} 
+            className="btn btn-outline-secondary">
+            Sort by Company <i className={`bi bi-caret-${sort.company == false ? 'down' : 'up'}-fill`} />
+          </button>
+        </div>
+        {/* users list component */}
         {
           users.map((user) => {
             return(
