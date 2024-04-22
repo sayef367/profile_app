@@ -1,7 +1,8 @@
 'use client'
 import AddUser from "@/components/addUser";
 import SortBar from "@/components/sortBar";
-import Link from "next/link";
+import TopSection from "@/components/topSection";
+import AllList from "@/components/allList";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -69,44 +70,13 @@ export default function Home() {
     <main className="container">
       <div className="row mt-5">
         {/* search and user input component */}
-        <div className="input-group mb-5">
-          <input 
-            type="text"
-            className="form-control rounded-pill me-3 text-center border border-secondary" 
-            placeholder="Search User Name"
-            onChange={handleFilter} 
-          />
-          <button 
-            type="button" 
-            className="btn btn-dark rounded-pill fw-light"
-            data-bs-toggle="modal" 
-            data-bs-target="#addUserModal">
-            <i className="bi bi-file-earmark-plus"></i> Add User
-          </button>
-        </div>
-
+        <TopSection handleFilter={handleFilter} />
+        
         {/* sort bar component */}
         <SortBar sortList={sortList} sort={sort} />
 
         {/* users list component */}
-        {
-          users.map((user) => {
-            return(
-              <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4" key={user.id}>
-                <Link href={`/${user.id}`} 
-                  className="link-underline link-underline-opacity-0 link-body-emphasis card p-3">
-                  <p className="mb-0">
-                    Id: {user.id} <br />
-                    Name: {`${user.firstName} ${user.lastName}`} <br />
-                    Email: {user.email} <br />
-                    Address: {`${user.address.address}, ${user.address.city}`} <br />
-                    Company: {user.company.name}
-                  </p>
-                </Link>
-              </div>
-            )
-          })
-        }
+        <AllList users={users} />
       </div>
       
       {/* add user model component*/}
